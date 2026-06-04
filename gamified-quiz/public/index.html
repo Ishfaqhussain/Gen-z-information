@@ -1,0 +1,1185 @@
+ <!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>🧠 The Ultimate Internet Clown Test</title>
+  <meta name="description" content="Take the Ultimate Internet Clown Test — find out how hilariously bad (or terrifyingly good) you are at spotting false information online!" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+/* ================= RESET ================= */
+*{box-sizing:border-box}
+html,body{height:100%}
+
+/* ================= BASE ================= */
+body{
+  margin:0;
+  font-family:'Inter',system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+  background:#121212;
+  color:#f1f1f1;
+}
+
+/* ================= LAYOUT ================= */
+.wrap{
+  max-width:1100px;
+  margin:24px auto;
+  padding:20px;
+}
+
+/* ================= CARD ================= */
+.card{
+  background:#1b1b1b;
+  border-radius:16px;
+  padding:22px;
+  border:1.8px solid #3a3a3a;
+  box-shadow:0 10px 30px rgba(0,0,0,0.55);
+}
+
+/* ================= HEADINGS ================= */
+h1{
+  font-size:clamp(26px,4vw,40px);
+  text-align:center;
+  margin:0 0 8px;
+  font-weight:800;
+  color:#ffffff;
+}
+.lead{
+  text-align:center;
+  color:#d6d6d6;
+  margin:6px 0 18px;
+  font-weight:600;
+}
+
+/* ================= HELPERS ================= */
+.center{display:flex;justify-content:center;align-items:center}
+.row{display:flex;gap:12px;flex-wrap:wrap}
+.hidden{display:none}
+
+/* ================= BUTTONS ================= */
+.btn{
+  cursor:pointer;
+  border:none;
+  border-radius:12px;
+  padding:12px 20px;
+  font-weight:700;
+  background:linear-gradient(135deg,#eab308,#d97706);
+  color:#1a1200;
+  box-shadow:0 6px 16px rgba(234,179,8,0.25);
+}
+.btn:disabled{opacity:.6;cursor:not-allowed}
+.btn.ghost{
+  background:transparent;
+  color:#ffffff;
+  border:1.8px solid #4a4a4a;
+}
+
+/* ================= QUESTIONS ================= */
+.question-card{
+  margin:18px 0;
+  padding:20px;
+  border-radius:14px;
+  background:#181818;
+  border:1.8px solid #016663;
+}
+.qmeta{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:8px;
+}
+.qnum{
+  font-weight:700;
+  color:#facc15;
+}
+
+/* PROGRESS BAR (SUBTLE GRADIENT) */
+.progress{
+  height:8px;
+  background:#2a2a2a;
+  border-radius:999px;
+  overflow:hidden;
+}
+.bar{
+  height:100%;
+  width:0%;
+  background:linear-gradient(90deg,#eab308,#facc15);
+}
+
+.qtext{
+  font-size:18px;
+  line-height:1.35;
+  margin-bottom:12px;
+  font-weight:600;
+}
+.choices{display:grid;gap:10px}
+.choice{
+  display:flex;
+  gap:12px;
+  align-items:center;
+  padding:11px 14px;
+  border-radius:10px;
+  cursor:pointer;
+  background:#141414;
+  border:1.8px solid #016663;
+}
+.choice input{accent-color:#eab308}
+textarea{
+  width:100%;
+  border-radius:8px;
+  padding:10px;
+  border:1.8px solid #3a3a3a;
+  background:#141414;
+  color:#ffffff;
+  resize:vertical;
+  min-height:90px;
+}
+
+/* ================= RESULT ================= */
+/* ================= RESULT (On-Screen Card) ================= */
+.result {
+  margin-top: 30px;
+  text-align: center;
+  padding: 40px 24px;
+  border-radius: 24px;
+  position: relative;
+  overflow: hidden;
+  
+  /* Deep, rich dark gradient background */
+  background: radial-gradient(circle at top right, #232323 0%, #121212 100%);
+  
+  /* The "Catchy" Golden Glow Border */
+  border: 2px solid transparent;
+  background-clip: padding-box;
+  box-shadow: 0 0 0 2px #eab308, 0 0 40px rgba(234, 179, 8, 0.2);
+  
+  color: #ffffff;
+  animation: floatUp 0.6s ease-out forwards;
+}
+
+/* Subtle float animation on load */
+@keyframes floatUp {
+  0% { transform: translateY(20px); opacity: 0; }
+  100% { transform: translateY(0); opacity: 1; }
+}
+
+#emoji {
+  font-size: 80px;
+  margin-bottom: 16px;
+  /* subtle bounce animation for the emoji */
+  animation: bounce 2s infinite;
+  text-shadow: 0 10px 20px rgba(0,0,0,0.5);
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+#title {
+  font-size: 42px;
+  font-weight: 900;
+  margin-bottom: 12px;
+  text-transform: uppercase;
+  letter-spacing: -1px;
+  
+  /* Gradient Text Fill */
+  background: linear-gradient(135deg, #fff 0%, #facc15 50%, #d97706 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+}
+
+#subtitle {
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 1.6;
+  color: #d4d4d4;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+#tips {
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  font-size: 15px;
+  color: #eab308; /* Gold color for the tip */
+  font-style: italic;
+}
+
+/* ================= SCREENSHOT EXPORT (The "Viral" Image) ================= */
+/* ================= SCREENSHOT EXPORT (Cool & Modern Tech Vibe) ================= */
+#exportPortrait {
+  position: fixed;
+  left: -9999px;
+  top: 0;
+  width: 1080px;
+  height: 1350px;
+
+  /* Background: Deep "Midnight" Radial Gradient (Not warm) */
+  background: radial-gradient(circle at 50% 20%, #1e293b 0%, #020617 80%);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 80px;
+}
+
+#exportInner {
+  width: 100%;
+  padding: 100px 60px;
+  border-radius: 40px;
+  text-align: center;
+
+  /* Glassmorphism: Cool Blue-Grey Tint */
+  background: rgba(15, 23, 42, 0.65); /* Dark Slate */
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+
+  /* Border: Cyan/Teal Glow instead of Gold */
+  border: 2px solid rgba(45, 212, 191, 0.4); /* Teal-400 */
+  box-shadow: 
+    0 0 0 1px rgba(45, 212, 191, 0.1), /* Inner ring */
+    0 30px 60px -10px rgba(0, 0, 0, 0.8), /* Deep Drop Shadow */
+    0 0 100px rgba(45, 212, 191, 0.1); /* Subtle Ambient Glow */
+}
+
+#exportEmoji {
+  font-size: 160px;
+  margin-bottom: 40px;
+  /* Drop shadow to make emoji pop off the dark glass */
+  filter: drop-shadow(0 15px 30px rgba(0,0,0,0.5));
+}
+
+#exportTitle {
+  font-size: 86px;
+  font-weight: 900;
+  margin-bottom: 24px;
+  line-height: 1.1;
+  letter-spacing: -2px;
+
+  /* Text Gradient: Cyan -> Sky Blue -> Indigo (Cool spectrum) */
+  background: linear-gradient(135deg, #2dd4bf 0%, #38bdf8 50%, #818cf8 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  
+  /* Subtle glow on text */
+  filter: drop-shadow(0 0 20px rgba(56, 189, 248, 0.3));
+}
+
+#exportSubtitle {
+  font-size: 36px;
+  font-weight: 500;
+  line-height: 1.5;
+  color: #e2e8f0; /* Light Slate Grey */
+  margin-bottom: 50px;
+  padding: 0 40px;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+}
+
+/* Footer for the export image */
+.export-footer {
+  position: absolute;
+  bottom: 70px;
+  font-size: 26px;
+  color: #64748b; /* Muted Slate */
+  font-weight: 700;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  font-family: monospace; /* Adds a 'Research/Data' feel */
+}
+/* ================= START GRID ================= */
+.start-grid{
+  display:grid;
+  grid-template-columns:1.2fr .8fr;
+  gap:16px;
+  margin-top:14px;
+}
+.info-box{
+  background:#181818;
+  border:1.8px solid #016663;
+  border-radius:12px;
+  padding:14px 16px;
+}
+.info-box h3{
+  margin:0 0 6px;
+  font-size:14px;
+  font-weight:700;
+  color:#facc15;
+}
+.info-box ul{
+  margin:0;
+  padding-left:18px;
+  font-size:13.5px;
+  line-height:1.35;
+  color:#e0e0e0;
+}
+.creator-note{
+  margin-top:12px;
+  font-size:12.5px;
+  color:#b5b5b5;
+  text-align:center;
+}
+
+/* ================= MOBILE ================= */
+@media(max-width:900px){
+  .start-grid{grid-template-columns:1fr}
+}
+@media(max-width:600px){
+  #title{font-size:20px}
+  #subtitle{font-size:14px}
+}
+</style>
+
+</head>
+<body>
+  <div class="wrap">
+    <div class="card" id="screen-start">
+  <h1>🧠 The Ultimate Internet Clown Test</h1>
+  <p class="lead">
+    A short, gamified test to explore how people interact with online information and false-information.
+  </p>
+
+  <div class="start-grid">
+
+    <!-- LEFT: CONSENT -->
+    <div class="info-box">
+      <h3>Informed Consent</h3>
+      <p class="consent-text">
+        This is a voluntary, gamified research-based test designed for educational and analytical purposes.
+        By participating, you consent to the collection of your <strong>quiz responses only</strong>.
+        <br><br>
+        No personally identifiable information is collected.
+        <br><br>
+        Your responses will be used in aggregated form for academic analysis related to
+        digital literacy and online information behavior.
+      </p>
+
+      <label style="display:flex;align-items:center;gap:10px;margin-top:10px;
+        background:var(--glass);padding:10px 12px;border-radius:10px;
+        border:1px solid rgba(255,255,255,0.04)">
+        <input type="checkbox" id="consentBox" />
+        <span style="font-weight:700">
+          I have read the above information and agree to participate anonymously.
+        </span>
+      </label>
+    </div>
+
+    <!-- RIGHT: WHAT’S IN THE QUIZ -->
+    <div class="info-box">
+      <h3>What’s in this quiz?</h3>
+      <ul>
+        <li>~20 short, interactive questions</li>
+        <li>Real-world online information scenarios</li>
+        <li>No right or wrong answers, just your instincts</li>
+        <li>A fun, shareable result at the end</li>
+      </ul>
+
+      <h3 style="margin-top:12px">What will you get?</h3>
+      <ul>
+        <li>A personalized (and slightly savage) result</li>
+        <li>Insight into your online information habits</li>
+        <li>A downloadable result image for sharing</li>
+      </ul>
+    </div>
+
+  </div>
+
+  <div class="creator-note">
+    This gamified questionnaire is created by a Research Scholar, University of Kashmir, Srinagar, JK, 190006.
+<br> <b> <i> For queries contact him at Ishfaq.lisscholar@kashmiruniversity.net
+  </div>
+
+  <div class="center" style="margin-top:16px">
+    <button id="startBtn" class="btn" disabled>Start the Test</button>
+  </div>
+
+  <div class="tip" style="text-align:center;margin-top:10px">
+    ~ 20 questions • ~4–6 minutes • anonymous participation
+  </div>
+</div>
+
+    <div class="card hidden" id="screen-quiz">
+      <div class="qmeta">
+        <div class="qnum" id="counter">Question 1/20</div>
+        <div class="pill" id="progressPill">0% complete</div>
+      </div>
+      <div class="progress"><div class="bar" id="progressBar"></div></div>
+
+      <div id="qwrap"></div>
+
+      <div class="row" style="justify-content:space-between;margin-top:16px">
+        <button class="btn ghost small" id="backBtn" disabled>← Back</button>
+        <div class="row">
+          <button class="btn ghost small" id="skipBtn">Skip</button>
+          <button class="btn small" id="nextBtn">Next →</button>
+        </div>
+      </div>
+
+      <div class="tip" style="margin-top:12px">For single-choice or scales, selecting auto-advances. For text or multi-select, use Next.</div>
+      <div class="hr" style="height:1px;background:rgba(255,255,255,0.04);margin:18px 0"></div>
+
+      <div class="note" style="color:var(--muted)">Session ID: <span id="rid"></span></div>
+    </div>
+
+    <div class="card hidden" id="screen-result">
+      <h1 style="text-align:center;margin-bottom:6px">🎉 Your Result</h1>
+      <div id="resultCard" class="result">
+        <div id="emoji">🧠</div>
+        <div id="title">Elite Fact-Slayer</div>
+        <div id="subtitle">You roast false information like it owes you money. People trust your takes and then regret it when you're wrong.</div>
+        <p id="tips">Your skepticism could cut glass. Even algorithms fear your Google-fu.</p>
+      </div>
+
+      <div class="row" style="margin-top:18px;justify-content:center;gap:12px">
+        <button class="btn" id="downloadImgBtn">📸 Download Screenshot to Share</button>
+        <button class="btn ghost" id="restartBtn">Restart</button>
+      </div>
+
+      <!-- Social share buttons (appear immediately when result shows) -->
+     <div id="shareRow" class="row" style="margin-top:14px;justify-content:center;gap:12px;display:none">
+  <a id="shareTwitter" class="btn share" target="_blank">🐦 Share on X</a>
+  <a id="shareFacebook" class="btn share" target="_blank">📘 Share on Facebook</a>
+  <a id="shareWhatsApp" class="btn share" target="_blank">💬 Share on WhatsApp</a>
+  <a id="shareReddit" class="btn share" target="_blank">🧠 Share on Reddit</a>
+  <a id="shareIG" class="btn share">📸 Instagram Story</a>
+</div>
+
+      <div id="saveStatus" class="tip" style="margin-top:12px">Saving answers to Firestore…</div>
+      <div id="errorBox" class="error hidden" style="margin-top:10px"></div>
+      <div id="successBox" class="success hidden" style="margin-top:10px">Thanks! Your responses have been saved (answers only).</div>
+      <div class="footer" style="margin-top:10px">Share your result screenshot and roast your friends. Be kind-ish.</div>
+    </div>
+  </div>
+
+  <!-- Off-screen portrait export target (1080x1350) -->
+  <div id="exportPortrait">
+  <div id="exportInner">
+    <div id="exportEmoji">🌐</div>
+    <div id="exportTitle">Supreme Internet Entity</div>
+    <div id="exportSubtitle">You have transcended mere mortals and achieved ancient Googling mastery. Even the Web Archive bows before your alt-tab wizardry.</div>
+  </div>
+  <p id="exportCredit" style="margin-top:50px;font-size: 6px;font-weight:700;color:#ffffff;">
+    </p>
+  </div>
+
+  <!-- html2canvas -->
+  <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+
+  <script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyCWbBCkV1S4aSo-DsjcpLY6FZtpm1SnOdA",
+  authDomain: "gamifiedquiz1.firebaseapp.com",
+  projectId: "gamifiedquiz1",
+  storageBucket: "gamifiedquiz1.firebasestorage.app",
+  messagingSenderId: "277899807809",
+  appId: "1:277899807809:web:24badc10866b5fdfb68ac0",
+};
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+/* =========================================================
+   FINAL QUESTIONNAIRE
+   Online Information Seeking & False Information Response
+   SPSS-Optimized | Publication-Ready
+   ========================================================= */
+
+const QUESTIONS = [
+
+  /* =====================
+     SECTION A: DEMOGRAPHICS
+     ===================== */
+
+  {
+    id: "age",
+    type: "mcq",
+    required: true,
+    text: "Which age group do you belong to?",
+    options: [
+      "Gen Z (1997–2012)",
+      "Gen Alpha (2013–present)",
+      "Millennials Gen-Y(1981–1996)",
+     "Generation X (1965–1980)"
+    ]
+  },
+
+  {
+    id: "gender",
+    type: "mcq",
+    required: true,
+    text: "Gender",
+    options: [
+      "Male",
+      "Female",
+      "Non-binary",
+      "Prefer not to say"
+    ]
+  },
+
+  {
+    id: "edu",
+    type: "mcq",
+    required: true,
+    text: "Current level of Education",
+    options: [
+      "Undergraduate",
+      "Postgraduate",
+      "Doctoral (PhD)",
+      "Higher Secondary",
+      "Other"
+    ]
+  },
+
+  {
+    id: "discipline_raw",
+    type: "open",
+    required: true,
+    text: "Field of study / discipline"
+  },
+
+  {
+    id: "internet_use",
+    type: "mcq",
+    required: true,
+    text: "Average daily internet usage",
+    options: [
+      "Less than 1 hour",
+      "1–3 hours",
+      "3–6 hours",
+      "6–9 hours",
+      "More than 9 hours"
+    ]
+  },
+
+  /* ==================================
+     SECTION B: INFORMATION SEEKING
+     ================================== */
+
+  {
+    id: "q1",
+    type: "likert",
+    required: true,
+    text: "I actively search for information when I need answers.",
+    labels: ["Strongly Disagree", "Disagree", "Neutral", "Agree", "Strongly Agree"]
+  },
+
+  {
+    id: "q2",
+    type: "likert",
+    required: true,
+    text: "I often come across useful information without intentionally searching for it.",
+    labels: ["Strongly Disagree", "Disagree", "Neutral", "Agree", "Strongly Agree"]
+  },
+
+  {
+    id: "q3",
+    type: "likert",
+    required: true,
+    text: "I feel confident selecting effective keywords when searching online.",
+    labels: ["Strongly Disagree", "Disagree", "Neutral", "Agree", "Strongly Agree"]
+  },
+
+  {
+    id: "q4",
+    type: "likert",
+    required: true,
+    text: "I frequently rely on AI tools (e.g., ChatGPT, Gemini, Copilot) to obtain information.",
+    labels: ["Strongly Disagree", "Disagree", "Neutral", "Agree", "Strongly Agree"]
+  },
+
+  /* ==================================
+     SECTION C: SEARCH STRATEGIES
+     ================================== */
+
+  {
+    id: "q5",
+    type: "likert",
+    required: true,
+    text: "Search engines (e.g., Google, Bing) are my primary source of information.",
+    labels: ["Strongly Disagree", "Disagree", "Neutral", "Agree", "Strongly Agree"]
+  },
+
+  {
+    id: "q6",
+    type: "likert",
+    required: true,
+    text: "I use social media platforms (Instagram, Facebook, YouTube, X) as search tools.",
+    labels: ["Strongly Disagree", "Disagree", "Neutral", "Agree", "Strongly Agree"]
+  },
+
+  {
+    id: "q7",
+    type: "likert",
+    required: true,
+    text: "I prefer platform-specific searches (e.g., YouTube, Reddit) over Google searches.",
+    labels: ["Strongly Disagree", "Disagree", "Neutral", "Agree", "Strongly Agree"]
+  },
+
+  {
+    id: "q8",
+    type: "likert",
+    required: true,
+    text: "Search suggestions, autocomplete, or recommendations influence what I search for.",
+    labels: ["Strongly Disagree", "Disagree", "Neutral", "Agree", "Strongly Agree"]
+  },
+
+  /* ==================================
+     SECTION D: CREDIBILITY EVALUATION
+     ================================== */
+
+  {
+    id: "q9",
+    type: "likert",
+    required: true,
+    text: "I check the author, date, or source before trusting online information.",
+    labels: ["Strongly Disagree", "Disagree", "Neutral", "Agree", "Strongly Agree"]
+  },
+
+  {
+    id: "q10",
+    type: "likert",
+    required: true,
+    text: "I cross-check information using multiple sources when something seems doubtful.",
+    labels: ["Strongly Disagree", "Disagree", "Neutral", "Agree", "Strongly Agree"]
+  },
+
+  {
+    id: "q11",
+    type: "likert",
+    required: true,
+    text: "I can usually identify misleading or manipulated content online.",
+    labels: ["Strongly Disagree", "Disagree", "Neutral", "Agree", "Strongly Agree"]
+  },
+
+  {
+    id: "q12",
+    type: "likert",
+    required: true,
+    text: "I am aware that false or misleading information is common on social media.",
+    labels: ["Strongly Disagree", "Disagree", "Neutral", "Agree", "Strongly Agree"]
+  },
+
+  {
+    id: "q13",
+    type: "likert",
+    required: true,
+    text: "I find peer-generated content (e.g., Reddit threads, TikTok explainers) more trustworthy than traditional news sources.",
+    labels: ["Strongly Disagree", "Disagree", "Neutral", "Agree", "Strongly Agree"],
+    reverse: true
+  },
+
+  /* ==================================
+     SECTION E: RESPONSE TO FALSE INFO
+     ================================== */
+
+  {
+    id: "q14",
+    type: "likert",
+    required: true,
+    text: "I verify information before sharing it with others.",
+    labels: ["Strongly Disagree", "Disagree", "Neutral", "Agree", "Strongly Agree"]
+  },
+
+  {
+    id: "q15",
+    type: "likert",
+    required: true,
+    text: "I avoid sharing information if I am unsure about its accuracy.",
+    labels: ["Strongly Disagree", "Disagree", "Neutral", "Agree", "Strongly Agree"]
+  },
+
+  {
+    id: "q16",
+    type: "likert",
+    required: true,
+    text: "I have accidentally believed or shared false information in the past.",
+    labels: ["Strongly Disagree", "Disagree", "Neutral", "Agree", "Strongly Agree"]
+  },
+
+  {
+    id: "q17",
+    type: "likert",
+    required: true,
+    text: "When I encounter questionable information, I usually scroll past it without checking.",
+    labels: ["Strongly Disagree", "Disagree", "Neutral", "Agree", "Strongly Agree"]
+  },
+
+  /* ==================================
+     SECTION F: BEHAVIORAL MCQs
+     ================================== */
+
+  {
+    id: "q18",
+    type: "checkbox",
+    required: true,
+    text: "Where do you most often encounter false or misleading information?",
+    options: [
+      "Instagram ",
+      "Facebook",
+      "YouTube",
+      "WhatsApp",
+      "X (Twitter)",
+      "Search Engines (Google/Bing/Yahoo etc)",
+      "AI tools (ChatGPT/Gemini etc)",
+      "Online news websites"
+    ]
+  },
+
+  {
+   id: "q19",
+    type: "likert",
+    required: true,
+    text: "When I encounter information that seems suspicious or sensational, I investigate it further rather than just ignoring it.",
+    labels: ["Strongly Disagree", "Disagree", "Neutral", "Agree", "Strongly Agree"
+    ]
+  },
+
+  /* ==================================
+     SECTION G: SELF-ASSESSED CONFIDENCE
+     ================================== */
+
+  {
+    id: "q20",
+    type: "likert",
+    required: true,
+    text: "I feel confident distinguishing factual information from false information online.",
+    labels: ["Strongly Disagree", "Disagree", "Neutral", "Agree", "Strongly Agree"]
+  },
+
+  {
+    id: "q21",
+    type: "likert",
+    required: true,
+    text: "I believe my information evaluation skills have improved over time.",
+    labels: ["Strongly Disagree", "Disagree", "Neutral", "Agree", "Strongly Agree"]
+  }
+
+];
+
+
+const $ = (sel) => document.querySelector(sel);
+function makeTimestampId(){
+  const d = new Date();
+  const pad = (n) => String(n).padStart(2,'0');
+  return `${d.getFullYear()}${pad(d.getMonth()+1)}${pad(d.getDate())}_${pad(d.getHours())}${pad(d.getMinutes())}${pad(d.getSeconds())}_${d.getMilliseconds()}`;
+}
+const rid = makeTimestampId();
+const startTime = Date.now();
+const state = { index:0, answers:{}, autoAdvance:true };
+
+const screenStart  = $('#screen-start');
+const screenQuiz   = $('#screen-quiz');
+const screenResult = $('#screen-result');
+const startBtn     = $('#startBtn');
+const backBtn      = $('#backBtn');
+const nextBtn      = $('#nextBtn');
+const skipBtn      = $('#skipBtn');
+const qwrap        = $('#qwrap');
+const counter      = $('#counter');
+const progressBar  = $('#progressBar');
+const progressPill = $('#progressPill');
+const ridSpan      = $('#rid');
+ridSpan.textContent = rid;
+
+const consentBox = $('#consentBox');
+const setStartState = () => {
+  const ok = !!consentBox.checked;
+  startBtn.disabled = !ok;
+};
+consentBox.addEventListener('change', setStartState);
+setStartState();
+
+// FIX: start should render the quiz (first question)
+startBtn.onclick = () => {
+  if(!consentBox.checked) return;
+  screenStart.classList.add('hidden');
+  screenQuiz.classList.remove('hidden');
+  state.index = 0;
+  render();
+};
+
+backBtn.onclick = () => { if(state.index>0){ state.index--; render(); }};
+nextBtn.onclick = () => { if(validateThenStore()) advance(); };
+skipBtn.onclick = () => { storeAnswer(null); advance(); };
+
+function advance(){
+  if(state.index < QUESTIONS.length-1){
+    state.index++; render();
+  } else { finish(); }
+}
+
+function render(){
+  const i = state.index;
+  const q = QUESTIONS[i];
+  const total = QUESTIONS.length;
+  counter.textContent = `Question ${i+1}/${total}`;
+  const pct = Math.round(((i) / total) * 100);
+  progressBar.style.width = `${pct}%`;
+  progressPill.textContent = `${pct}% complete`;
+  backBtn.disabled = i===0;
+
+  let html = `<div class="question-card"><div class="qtext">${q.text}</div><div class="choices">`;
+  const prev = state.answers[q.id];
+
+  if(q.type==='likert' || q.type==='likert-neg'){
+    for(let v=1; v<=5; v++){
+      const checked = prev==v ? 'checked' : '';
+      html += `<label class="choice"><input type="radio" name="${q.id}" value="${v}" ${checked}/> <span style="font-weight:700">${v}. ${q.labels[v-1]}</span></label>`;
+    }
+  } else if(q.type==='yesno'){
+    ['Yes','No'].forEach(opt=>{
+      const checked = prev===opt ? 'checked' : '';
+      html += `<label class="choice"><input type="radio" name="${q.id}" value="${opt}" ${checked}/> <span style="font-weight:700">${opt}</span></label>`;
+    });
+  } else if(q.type==='mcq'){
+    q.options.forEach(opt=>{
+      const checked = prev===opt ? 'checked' : '';
+      html += `<label class="choice"><input type="radio" name="${q.id}" value="${opt}" ${checked}/> <span style="font-weight:700">${opt}</span></label>`;
+    });
+  } else if(q.type==='checkbox'){
+    const prevArr = Array.isArray(prev)?prev:[];
+    q.options.forEach(opt=>{
+      const checked = prevArr.includes(opt)?'checked':'';
+      html += `<label class="choice"><input type="checkbox" name="${q.id}" value="${opt}" ${checked}/> <span style="font-weight:700">${opt}</span></label>`;
+    });
+    if(q.max) html += `<div class="tip">Select up to ${q.max}.</div>`;
+  } else if(q.type==='open'){
+    const val = typeof prev==='string'?prev:'';
+    html += `<textarea id="open_${q.id}" rows="4" placeholder="Type here (optional)">${val}</textarea>`;
+  } else if(q.type==='age'){
+    q.options.forEach(opt=>{
+      const checked = prev===opt? 'checked' : '';
+      html += `<label class="choice"><input type="radio" name="${q.id}" value="${opt}" ${checked}/> <span style="font-weight:700">${opt}</span></label>`;
+    });
+  }
+
+  html += `</div></div>`;
+  qwrap.innerHTML = html;
+
+  // attach events
+  qwrap.querySelectorAll('input[type="radio"]').forEach(r=>{
+    r.addEventListener('change', ()=>{ storeAnswer(r.value); if(state.autoAdvance) setTimeout(advance, 150); });
+  });
+  qwrap.querySelectorAll('input[type="checkbox"]').forEach(cb=>{
+    cb.addEventListener('change', ()=>{
+      const boxes=[...qwrap.querySelectorAll('input[type="checkbox"]')];
+      const checked = boxes.filter(b=>b.checked);
+      if(q.max && checked.length>q.max){ cb.checked=false; }
+      storeAnswer(checked.map(b=>b.value));
+    });
+  });
+}
+
+function validateThenStore(){
+  const q = QUESTIONS[state.index];
+  let val = null;
+
+  // --- CASE 1: SCORABLE QUESTIONS (Likert, Yes/No) ---
+  if(['likert', 'likert-neg', 'yesno', 'mcq', 'age'].includes(q.type)){
+    const sel = qwrap.querySelector('input[type="radio"]:checked');
+    if(sel) {
+      // If it's a scoring question, FORCE it to be a Number
+      // This fixes the "2" (string) vs 2 (number) issue
+      if(q.type.includes('likert') || q.type === 'yesno') {
+        val = Number(sel.value); 
+      } else {
+        // Keep age/gender/mcq as strings
+        val = sel.value; 
+      }
+    }
+
+  // --- CASE 2: CHECKBOXES (q18) ---
+  } else if(q.type === 'checkbox'){
+    const checked = [...qwrap.querySelectorAll('input[type="checkbox"]:checked')];
+    const arr = checked.map(i => i.value);
+    
+    // FIX FOR NaN: Join array into a string.
+    // Result: "Instagram, YouTube" (String) instead of ["Instagram"] (Array)
+    val = arr.length ? arr.join(', ') : null;
+
+  // --- CASE 3: OPEN TEXT ---
+  } else if(q.type === 'open'){
+    val = (qwrap.querySelector(`#open_${q.id}`)?.value || '').trim();
+  }
+
+  // --- VALIDATION ---
+  if(q.required){
+    if(val === null || val === '') { shake(); return false; }
+  }
+
+  // Final Safety Check: Never save NaN
+  if (typeof val === 'number' && isNaN(val)) {
+    console.error("Attempted to save NaN for", q.id);
+    return false;
+  }
+
+  storeAnswer(val);
+  return true;
+}
+function storeAnswer(val){ const q = QUESTIONS[state.index]; state.answers[q.id] = val; }
+function shake(){ qwrap.style.transform='translateX(0)'; qwrap.animate([{transform:'translateX(0)'},{transform:'translateX(-8px)'},{transform:'translateX(8px)'},{transform:'translateX(0)'}],{duration:220}); }
+
+  // 1. Store your outcomes OUTSIDE the function so they don't reset every time it runs.
+const allOutcomes = [
+  // --- YOUR ORIGINAL ROASTS ---
+  {
+    title: "🤡 The Village Idiot (Web3 Edition)",
+    emoji: "🤡",
+    advice: {
+      subtitle: "You would hand over your bank details to a Nigerian Prince if he used a trending TikTok audio. Your brain is smoother than a polished bowling ball.",
+      tip: "Please, for the love of society, unplug your router."
+    }
+  },
+  {
+    title: "🧢 Influencer of Ignorance",
+    emoji: "🧢",
+    advice: {
+      subtitle: "You repost nonsense with absolute confidence and zero receipts. People follow you for entertainment, and occasionally for bad facts.",
+      tip: "Maybe fact-check once before monetizing someone else's error-free ignorance."
+    }
+  },
+  {
+    title: "🧟 Doomscrolling Zombie",
+    emoji: "🧟",
+    advice: {
+      subtitle: "Your brain has been fully outsourced to the algorithm. You believe everything your weird uncle posts on Facebook as long as it has a red circle on the thumbnail.",
+      tip: "Try blinking. And maybe reading past the headline once a year."
+    }
+  },
+  {
+    title: "🐑 Algorithmic Sheep",
+    emoji: "🐑",
+    advice: {
+      subtitle: "You occasionally fact-check, but only when it proves you right. Otherwise, you happily follow the herd off the cliff of misinformation.",
+      tip: "A Google search takes 5 seconds. Stop relying on Reddit comments for your worldview."
+    }
+  },
+  {
+    title: "🧃 Clickbait Connoisseur",
+    emoji: "🧃",
+    advice: {
+      subtitle: "You treat fake news like fine wine. You know it's garbage, but you slurp it down anyway just to feel something. You love the drama too much to verify it.",
+      tip: "Stop sharing sensational trash just to get likes in your group chat."
+    }
+  },
+  {
+    title: "🤓 Insufferable Armchair Expert",
+    emoji: "🤓",
+    advice: {
+      subtitle: "You watched one 10-minute YouTube video essay at 2x speed and now you think you have a PhD. Your friends have definitely muted your notifications.",
+      tip: "You might be right, but nobody likes you. Touch some grass."
+    }
+  },
+  {
+    title: "🕵️ Tinfoil Hat Commander",
+    emoji: "🕵️",
+    advice: {
+      subtitle: "You trust absolutely nothing, not even this quiz. You probably browse in incognito mode with a VPN while wearing gloves. You verify memes for fun.",
+      tip: "Relax. Not everything is a psychological psy-op by the government."
+    }
+  },
+  {
+    title: "🤥 Certified Pathological Liar",
+    emoji: "🤥",
+    advice: {
+      subtitle: "Nobody is this perfect. You absolutely cheated on a personality quiz just to look good for a computer. The algorithm sees through your desperate lies.",
+      tip: "Next time, try answering honestly instead of trying to win a fake internet trophy."
+    }
+  },
+
+  // --- NEW: SARCASTIC POSITIVES ---
+  {
+    title: "🏆 LinkedIn Thought Leader",
+    emoji: "🏆",
+    advice: {
+      subtitle: "You managed to turn a 3-second fake news article into a 5-paragraph motivational post about B2B sales. Your ability to confidently spin garbage into gold is truly inspiring.",
+      tip: "Please stop asking us if we 'Agree?' in the comments."
+    }
+  },
+  {
+    title: "🛑 The Group Chat Buzzkill",
+    emoji: "🛑",
+    advice: {
+      subtitle: "Congratulations! You successfully fact-checked your aunt's harmless Minion meme and ruined the family group chat. You are technically correct, but at what cost?",
+      tip: "Let people enjoy things sometimes. Not everything needs a Snopes link."
+    }
+  },
+  {
+    title: "🧘 Zen Master of Apathy",
+    emoji: "🧘",
+    advice: {
+      subtitle: "You never fall for online misinformation because you literally do not care about anything happening in the world. Your ignorance is aggressively blissful.",
+      tip: "Maybe check the news once a month just to make sure the world hasn't ended."
+    }
+  },
+
+  // --- NEW: PURE POSITIVES (But still fun) ---
+  {
+    title: "🦉 Majestic Digital Owl",
+    emoji: "🦉",
+    advice: {
+      subtitle: "You navigate the chaotic web with wisdom, grace, and a premium ad-blocker. You actually verify sources before hitting retweet. You are a rare, endangered species.",
+      tip: "Keep being the voice of reason. The internet desperately needs you."
+    }
+  },
+  {
+    title: "🛡️ Guardian of the Feed",
+    emoji: "🛡️",
+    advice: {
+      subtitle: "Algorithms try to feed you garbage, but your critical thinking deflects it like a digital shield. You are the hero the internet doesn't deserve, but definitely needs.",
+      tip: "Teach your friends your ways before they buy magic crypto beans."
+    }
+  },
+  {
+    title: "🧙‍♂️ Grandmaster of the Web",
+    emoji: "🧙‍♂️",
+    advice: {
+      subtitle: "You spot deepfakes from a mile away and treat AI hallucinations like cheap parlor tricks. You are surfing the web in 4D while the rest of us are using dial-up.",
+      tip: "Please be gentle with us when you eventually rule the metaverse."
+    }
+  }
+];
+
+// 2. Create a "deck" array to track which ones are left to show
+let availableOutcomes = [...allOutcomes];
+
+function getRandomResult() {
+  // 3. If we run out of outcomes, reshuffle the deck by copying the original list again
+  if (availableOutcomes.length === 0) {
+    availableOutcomes = [...allOutcomes];
+  }
+
+  // 4. Pick a random number based on the REMAINING outcomes, not the total length
+  const randomIndex = Math.floor(Math.random() * availableOutcomes.length);
+
+  // 5. Use splice() to extract the outcome from the array so it can't be picked again this cycle
+  const selectedOutcome = availableOutcomes.splice(randomIndex, 1)[0];
+
+  return selectedOutcome;
+}
+async function finish(){
+  // 1. Grab a completely random result
+  const randomOutcome = getRandomResult();
+  const {title, emoji, advice} = randomOutcome;
+  $('#title').textContent = title;
+  $('#emoji').textContent = emoji;
+  $('#subtitle').textContent = advice.subtitle;
+  $('#tips').textContent = advice.tip;
+  $('#exportTitle').textContent = title;
+  $('#exportSubtitle').textContent = advice.subtitle;
+  $('#exportEmoji').textContent = emoji;
+  screenQuiz.classList.add('hidden');
+  screenResult.classList.remove('hidden');
+
+  // show share buttons immediately
+  document.getElementById('shareRow').style.display = 'flex';
+
+  const payload = {
+    researchId: rid,
+    createdAt: serverTimestamp(),
+    tookMs: Date.now()-startTime,
+    totalQuestions: QUESTIONS.length,
+    ...sanitizeAnswers(state.answers),
+    meta: {
+      ua: navigator.userAgent,
+      lang: navigator.language||null,
+      tz: Intl.DateTimeFormat().resolvedOptions().timeZone||null,
+      screen: `${window.screen?.width||0}x${window.screen?.height||0}`
+    }
+  };
+
+  try{
+    $('#saveStatus').textContent = 'Saving answers to Firestore…';
+    const ref = await addDoc(collection(db, 'quizResponses'), payload);
+    $('#successBox').classList.remove('hidden');
+    $('#saveStatus').textContent = `Saved to Firestore (id: ${ref.id}).`;
+  } catch(err){
+    console.error(err);
+    $('#saveStatus').textContent = 'Unable to save to Firestore right now.';
+    $('#errorBox').classList.remove('hidden');
+    $('#errorBox').textContent = 'Save failed. You can still download your answers JSON.';
+    const blob = new Blob([JSON.stringify(payload,null,2)], {type:'application/json'});
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url; a.download = `quizResponses_${rid}.json`; a.className='btn ghost small'; a.textContent='Download JSON';
+    $('#errorBox').appendChild(document.createElement('br'));
+    $('#errorBox').appendChild(a);
+  }
+
+  updateShareLinks(); // prepare share hrefs
+}
+
+function sanitizeAnswers(ans) {
+  const clean = {};
+  
+  for (const [k, v] of Object.entries(ans)) {
+    
+    // CASE 1: The Checkbox Question (q18)
+    // Keep this as a String (e.g., "Instagram, YouTube") because it's text.
+    if (k === 'q18') {
+       clean[k] = Array.isArray(v) ? v.join(', ') : String(v);
+    }
+
+    // CASE 2: Likert Questions (q1 - q21)
+    // These MUST be Numbers for SPSS (Mean, Correlation, etc.)
+    // We check if the key starts with 'q' AND is NOT 'q18'
+    else if (k.startsWith('q')) {
+      // Force conversion to Number. 
+      // "5" becomes 5.
+      clean[k] = Number(v); 
+    }
+
+    // CASE 3: Demographics & Metadata (age, gender, etc.)
+    // Keep these as Strings (Nominal data)
+    else {
+      clean[k] = v;
+    }
+  }
+  
+  return clean;
+}
+// Download portrait result
+$('#downloadImgBtn').onclick = async()=>{
+  const container = document.getElementById('exportPortrait');
+  const canvas = await html2canvas(container);
+  const url = canvas.toDataURL('image/png');
+  const a = document.createElement('a');
+  a.href = url; a.download = `InternetClownTest_${rid}.png`;
+  document.body.appendChild(a); a.click(); document.body.removeChild(a);
+};
+
+// Share links: use custom hosted URL provided by user
+const HOST_LINK = 'https://gamifiedquiz1.web.app';
+
+function updateShareLinks() {
+  const title = $('#exportTitle').textContent;
+  const subtitle = $('#exportSubtitle').textContent;
+
+  const message = `${title} - ${subtitle}. Take the literacy test now!`;
+
+  const encodedMsg = encodeURIComponent(message);
+  const encodedLink = encodeURIComponent(HOST_LINK);
+
+  // X / Twitter
+  $('#shareTwitter').href =
+    `https://twitter.com/intent/tweet?text=${encodedMsg}&url=${encodedLink}`;
+
+  // WhatsApp
+  $('#shareWhatsApp').href =
+    `https://wa.me/?text=${encodedMsg}%20${encodedLink}`;
+
+  // Facebook (URL only)
+  $('#shareFacebook').href =
+    `https://www.facebook.com/sharer/sharer.php?u=${encodedLink}`;
+
+  // Reddit
+  $('#shareReddit').href =
+    `https://www.reddit.com/submit?title=${encodedMsg}&url=${encodedLink}`;
+}
+   </script>
+</body>
+</html>
