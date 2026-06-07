@@ -1,9 +1,0 @@
-rules_version = '2';
-service cloud.firestore {
-  match /databases/{database}/documents {
-    match /quizResponses/{doc} {
-      allow create: if true;              // anyone can submit
-      allow read, update, delete: if false; // nobody can read/modify
-    }
-  }
-}
